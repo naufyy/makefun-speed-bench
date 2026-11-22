@@ -39,10 +39,13 @@ Entries under test today:
 - `champion` — the live csv-reader-speed-01 entry (AssemblyScript WASM transducer).
 - `v2` — the foundations/speed/v2 scaffold example (single-pass WASM, size-optimised build,
   driver pre-touch).
-- `null` — the control: reads the cases file and writes one empty answer per case, doing no
-  per-case work. Every entry is also reported **net of null**, mirroring the heat's
-  control subtraction. (make.fun's own control does not read the input, so this local null
-  is a slightly heavier floor and the net numbers are conservative.)
+- `null` — the control, server-style: it does **not** read or parse the input at all; it
+  starts up and writes one empty answer per case (the case count, 6, is hardcoded from the
+  practice set). This mirrors make.fun's own heat control (`grader/code-heat.ts`), whose
+  subtraction floor is just process start plus an output write. Every entry is also reported
+  **net of null**, mirroring that subtraction. (An earlier version of this null read and
+  JSON.parsed the 11 MB cases file, which made the floor heavier than the real entries —
+  they avoid JSON.parse entirely — and pushed the net numbers negative.)
 
 ## Running it
 
